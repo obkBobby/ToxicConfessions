@@ -8,6 +8,10 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
 
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy();
   expect(await page.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBeTruthy();
+  await expect(page.locator('h1')).toContainText('TOXICCONFESSIONS');
+  await expect(page.getByText('You did the mess. Now tell the Classmates.')).toBeVisible();
+  await expect(page.getByText('YOU DID WHAT?!')).toHaveCount(0);
+  await expect(page.getByText('REACTION CAM')).toHaveCount(0);
 
   const button = page.locator('#open-recorder');
   await expect(button).toBeDisabled();
