@@ -215,53 +215,6 @@ button, input { font: inherit; }
   margin: 0 auto;
   padding: clamp(72px, 9vw, 140px) clamp(20px, 4vw, 64px);
 }
-.section-intro {
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  column-gap: 60px;
-  align-items: end;
-  margin-bottom: 50px;
-}
-.section-intro .eyebrow { grid-column: 1 / -1; }
-.section-intro h2, .rules h2 {
-  margin: 0;
-  font: 900 clamp(54px, 7vw, 104px)/.82 var(--display);
-  letter-spacing: -.08em;
-}
-.section-intro > p:last-child {
-  margin: 0;
-  max-width: 620px;
-  font-size: clamp(19px, 2vw, 25px);
-  line-height: 1.35;
-}
-
-.confession-formula {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  margin: 0 0 clamp(72px, 8vw, 110px);
-  padding: 0;
-  list-style: none;
-  background: var(--ink);
-}
-.confession-formula li {
-  min-height: 230px;
-  display: grid;
-  grid-template-columns: 54px 1fr;
-  gap: 18px;
-  padding: 28px;
-  background: var(--white);
-  font-size: 16px;
-}
-.confession-formula li > span {
-  display: block;
-  color: var(--red);
-  font: 900 34px/1 var(--display);
-}
-.confession-formula strong { font-size: 17px; }
-.confession-formula p { margin: 10px 0 0; }
-.confession-formula b { color: var(--red-dark); }
-
 .recorder-intro {
   max-width: 820px;
   margin: 0 0 42px;
@@ -279,6 +232,36 @@ button, input { font: inherit; }
 .recorder-intro .judge-line {
   white-space: nowrap;
   font-size: clamp(14px, 1.5vw, 21px);
+}
+.quick-prompt {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 22px;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px 22px;
+  color: var(--white);
+  background: var(--blue);
+  border: var(--line);
+}
+.quick-prompt p { margin: 0; }
+.quick-prompt__label {
+  color: var(--yellow);
+  font: 900 14px/1 var(--utility);
+  letter-spacing: .04em;
+}
+.quick-prompt p:last-child { font-size: clamp(17px, 1.8vw, 22px); }
+.recorder-notes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.recorder-notes p {
+  margin: 0;
+  padding-left: 14px;
+  border-left: 4px solid var(--red);
+  font-size: 14px;
 }
 
 .recorder-shell {
@@ -359,61 +342,43 @@ button, input { font: inherit; }
   background: #fff;
 }
 
-.field-guide {
-  margin-top: 42px;
-  padding: 26px;
-  border: var(--line);
-  background: var(--paper-deep);
-}
-.field-guide h3 { margin: 0 0 20px; font: 900 28px/1 var(--display); }
-.field-guide dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin: 0; }
-.field-guide dt { margin-bottom: 6px; font: 800 12px/1 var(--utility); text-transform: uppercase; }
-.field-guide dd { margin: 0; font-size: 15px; }
-.field-guide dd strong { display: inline-block; margin-bottom: 5px; font-size: 17px; }
-.callback-note {
-  margin-top: 28px;
-  padding-top: 26px;
-  border-top: var(--line);
+.callback-line {
   max-width: 920px;
+  margin: 30px 0 0;
+  font-size: clamp(16px, 1.6vw, 20px);
 }
-.callback-note h4 {
-  margin: 0 0 12px;
-  font: 900 25px/1 var(--display);
-}
-.callback-note p { margin: 7px 0; font-size: 15px; }
 
-.rules {
+.safety-compact {
   display: grid;
-  grid-template-columns: .75fr 1.25fr;
-  gap: clamp(40px, 7vw, 120px);
-  padding: clamp(72px, 8vw, 120px) clamp(20px, 4vw, 64px);
-  color: var(--white);
-  background: var(--blue);
-  border-top: 4px solid var(--ink);
-  border-bottom: 4px solid var(--ink);
-}
-.rules > div, .rules ul { max-width: 680px; }
-.rules h2 { font-size: clamp(52px, 6vw, 92px); }
-.rules-dek { max-width: 520px; margin: 24px 0 0; font-size: clamp(18px, 1.8vw, 24px); }
-.rules ul { margin: 0; padding: 0; list-style: none; }
-.rules li {
-  padding: 15px 0 15px 38px;
-  border-bottom: 1px solid rgba(255,255,255,.45);
-  position: relative;
-}
-.rules li::before { content: "×"; position: absolute; left: 3px; top: 15px; color: var(--yellow); font: 900 26px/1 var(--display); }
-
-.verdict-banner {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0;
-  padding: 28px 18px;
-  background: var(--red);
+  grid-template-columns: .8fr 1.2fr;
+  gap: clamp(30px, 5vw, 80px);
+  padding: clamp(48px, 6vw, 80px) max(20px, calc((100vw - 1092px) / 2));
+  background: var(--paper-deep);
+  border-top: var(--line);
   border-bottom: var(--line);
 }
-.verdict-banner p { margin: 0; font: 900 clamp(17px, 2.2vw, 34px)/1 var(--display); }
-.verdict-banner p:not(:last-child)::after { content: " / "; color: var(--white); padding: 0 .4em; }
+.safety-compact > div, .safety-compact ul { max-width: 620px; }
+.safety-compact h2 {
+  margin: 0 0 18px;
+  font: 900 clamp(38px, 4.8vw, 68px)/.86 var(--display);
+  letter-spacing: -.07em;
+}
+.safety-compact > div > p:last-child { margin: 0; font-size: 17px; }
+.safety-compact ul { margin: 0; padding: 0; list-style: none; }
+.safety-compact li {
+  position: relative;
+  padding: 13px 0 13px 28px;
+  border-bottom: 1px solid rgba(17,16,13,.25);
+  font-size: 15px;
+}
+.safety-compact li::before {
+  content: "×";
+  position: absolute;
+  left: 2px;
+  top: 13px;
+  color: var(--red);
+  font: 900 21px/1 var(--display);
+}
 
 footer {
   display: grid;
@@ -428,9 +393,7 @@ footer p { margin: 0; }
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
   .host-card { max-width: 610px; justify-self: start; }
-  .section-intro { grid-template-columns: 1fr; row-gap: 24px; }
-  .field-guide dl { grid-template-columns: 1fr; }
-  .rules { grid-template-columns: 1fr; }
+  .safety-compact { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -447,14 +410,14 @@ footer p { margin: 0; }
   .hotline-strip { grid-template-columns: repeat(2, 1fr); }
   .hotline-strip p:nth-child(2) { border-right: 0; }
   .hotline-strip p:nth-child(-n+2) { border-bottom: var(--line); }
-  .recorder-section { padding-top: 56px; padding-bottom: 64px; }
-  .section-intro { margin-bottom: 36px; }
-  .confession-formula { grid-template-columns: 1fr; margin-bottom: 56px; }
-  .confession-formula li { min-height: auto; grid-template-columns: 42px 1fr; padding: 22px 18px; }
-  .recorder-intro { margin-bottom: 32px; }
+  .recorder-section { padding-top: 48px; padding-bottom: 52px; }
+  .recorder-intro { margin-bottom: 28px; }
+  .quick-prompt { grid-template-columns: 1fr; gap: 8px; margin-top: 24px; padding: 18px; }
+  .quick-prompt p:last-child { font-size: 17px; }
+  .recorder-notes { grid-template-columns: 1fr; gap: 12px; }
   .gate-kicker { font-size: 22px; }
-  .field-guide { margin-top: 32px; }
-  .rules { padding-top: 58px; padding-bottom: 58px; }
+  .callback-line { margin-top: 24px; font-size: 16px; }
+  .safety-compact { gap: 26px; padding: 42px 20px; }
   .podline-frame { padding: 10px; }
   .podline-frame iframe { min-width: 0; min-height: 720px; }
   footer { grid-template-columns: 1fr; align-items: start; }

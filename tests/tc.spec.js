@@ -15,7 +15,12 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('Cheated and somehow think you had a good reason?')).toHaveCount(0);
   await expect(page.getByText('THE ASSIGNMENT', { exact: true })).toHaveCount(0);
   await expect(page.getByText('If your confession makes the show then the Classmates get to judge you.')).toBeVisible();
-  await expect(page.getByText('YOU SPEAK.')).toBeVisible();
+  await expect(page.getByText('Set the scene. Tell on yourself. Give us the mess. Ask the Classmates.')).toBeVisible();
+  await expect(page.getByText("Because sometimes 90 seconds ain't enough.")).toBeVisible();
+  await expect(page.locator('.confession-formula')).toHaveCount(0);
+  await expect(page.locator('.field-guide')).toHaveCount(0);
+  await expect(page.locator('.verdict-banner')).toHaveCount(0);
+  await expect(page.locator('.safety-compact')).toBeVisible();
 
   const cta = page.locator('.primary-cta');
   await expect(cta).toHaveAttribute('href', '#ready-to-confess');
