@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4efdf">
+  <meta name="description" content="Leave a 90-second Toxic Confession for OBK. Use an alias, tell the whole messy truth, and let the Classmates decide.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Toxic Confessions Hotline — OBK">
+  <meta property="og:description" content="You did the mess. Now tell the Classmates.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toxicconfessions.co/">
+  <meta property="og:image" content="https://toxicconfessions.co/assets/obk-hosts.webp">
+  <title>Toxic Confessions Hotline — OBK</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23ee4b2b'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial Black,sans-serif' font-size='32' fill='white'%3ETC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#recorder">Skip to recorder</a>
+
+  <header class="site-header">
+    <a class="obk-mark" href="https://onlyblackkids.com" aria-label="Only Black Kids home">
+      <span class="obk-mark__small">ONLY BLACK KIDS</span>
+      <span class="obk-mark__large">OBK</span>
+    </a>
+    <div class="header-status"><span class="status-dot" aria-hidden="true"></span> Hotline open</div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A CLASSMATE CONFESSIONAL</p>
+        <h1 id="hero-title">TOXIC<br><span>CONFESSIONS</span><br>HOTLINE</h1>
+        <p class="hero-dek">You did the mess.<br>Now tell the Classmates.</p>
+        <a class="primary-cta" href="#recorder">Leave your confession <span aria-hidden="true">↓</span></a>
+      </div>
+
+      <figure class="host-card">
+        <div class="photo-wrap">
+          <img src="assets/obk-hosts.webp" width="1600" height="900" alt="The two OBK hosts at their podcast microphones">
+          <div class="photo-stamp" aria-hidden="true">OBK<br>INTAKE</div>
+        </div>
+        <figcaption>YOUR STORY <span>→</span> OBK'S REACTION <span>→</span> CLASSMATE VERDICT</figcaption>
+      </figure>
+    </section>
+
+    <section class="hotline-strip" aria-label="Submission essentials">
+      <p><strong>90</strong> seconds max</p>
+      <p><strong>Alias</strong> only</p>
+      <p><strong>18+</strong> submissions</p>
+      <p><strong>One</strong> messy truth</p>
+    </section>
+
+    <section class="recorder-section" id="recorder" aria-labelledby="recorder-title">
+      <div class="section-intro">
+        <p class="eyebrow">THE ASSIGNMENT</p>
+        <h2 id="recorder-title">Take the mic.</h2>
+        <p>Tell us what happened, what <em>you</em> did, and the part that makes you look bad. A great confession gives OBK something to argue about—and gives the Classmates a verdict to deliver.</p>
+      </div>
+
+      <ol class="confession-formula" aria-label="How to tell your confession">
+        <li><span>1</span><div><strong>Set the scene.</strong><br>Who was involved? No real names.</div></li>
+        <li><span>2</span><div><strong>Tell on yourself.</strong><br>What did you actually do?</div></li>
+        <li><span>3</span><div><strong>Give us the turn.</strong><br>What made it worse?</div></li>
+        <li><span>4</span><div><strong>Ask the Classmates.</strong><br>What verdict do you want?</div></li>
+      </ol>
+
+      <div class="recorder-shell">
+        <div class="recorder-label">
+          <span><i aria-hidden="true"></i> RECORDER 01</span>
+          <span>MAX 01:30</span>
+        </div>
+
+        <div class="consent-gate" id="consent-gate">
+          <p class="gate-kicker">Before the mic turns on:</p>
+          <label class="check-row">
+            <input type="checkbox" id="age-check">
+            <span>I confirm that I am at least 18 years old.</span>
+          </label>
+          <label class="check-row">
+            <input type="checkbox" id="rights-check">
+            <span>I understand that OBK may edit, play, publish, distribute, and discuss my recording, alias, and submitted details in podcast, video, social, and promotional content without payment.</span>
+          </label>
+          <button class="open-recorder" id="open-recorder" type="button" disabled>I agree — open the recorder</button>
+          <p class="gate-note">Opening the recorder confirms these statements. Submission does not guarantee that OBK will use your recording or contact you.</p>
+        </div>
+
+        <div class="podline-frame" id="podline-frame" hidden>
+          <iframe title="Toxic Confessions voice recorder" allow="microphone" src="about:blank" data-src="https://podline.fm/e/toxic-confessions"></iframe>
+          <p class="iframe-fallback">Recorder not loading? <a href="https://podline.fm/toxic-confessions" target="_blank" rel="noopener">Open the secure Podline recorder</a>.</p>
+        </div>
+      </div>
+
+      <aside class="field-guide" aria-labelledby="field-guide-title">
+        <h3 id="field-guide-title">What to enter</h3>
+        <dl>
+          <div><dt>Name</dt><dd>Your public alias—not your real name.</dd></div>
+          <div><dt>Email</dt><dd>Private. OBK may use it to ask for details or invite you to a separately recorded callback.</dd></div>
+          <div><dt>Recording</dt><dd>Skip identifying details about other people. Keep it specific, funny, and under 90 seconds.</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="rules" aria-labelledby="rules-title">
+      <div>
+        <p class="eyebrow">KEEP IT MESSY, NOT DANGEROUS</p>
+        <h2 id="rules-title">Hotline rules.</h2>
+      </div>
+      <ul>
+        <li>Use aliases. Do not share real names, employers, addresses, schools, or other identifying details.</li>
+        <li>Do not identify minors or include threats, harassment, or plans to harm yourself or anyone else.</li>
+        <li>Only submit a recording you made and a story you have the right to share.</li>
+        <li>OBK chooses what gets used, edited, discussed, or invited to a recorded callback.</li>
+      </ul>
+    </section>
+
+    <section class="verdict-banner" aria-label="Classmate verdict">
+      <p>CONFESSOR SPEAKS.</p>
+      <p>OBK REACTS.</p>
+      <p>CLASSMATES DECIDE.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Toxic Confessions Hotline</strong><br>A recurring OBK / Only Black Kids format.</p>
+    <p><a href="https://onlyblackkids.com">OnlyBlackKids.com</a></p>
+    <p class="copyright">© <span id="year"></span> Only Black Kids</p>
+  </footer>
+</body>
+</html>
