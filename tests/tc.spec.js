@@ -12,6 +12,10 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('You did the mess. Now tell the Classmates.')).toBeVisible();
   await expect(page.getByText('YOU DID WHAT?!')).toHaveCount(0);
   await expect(page.getByText('REACTION CAM')).toHaveCount(0);
+  await expect(page.getByText('Cheated and somehow think you had a good reason?')).toHaveCount(0);
+  await expect(page.getByText('THE ASSIGNMENT', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('If your confession makes the show then the Classmates get to judge you.')).toBeVisible();
+  await expect(page.getByText('YOU SPEAK.')).toBeVisible();
 
   const button = page.locator('#open-recorder');
   await expect(button).toBeDisabled();
