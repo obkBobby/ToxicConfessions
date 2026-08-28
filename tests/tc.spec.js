@@ -14,16 +14,16 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('REACTION CAM')).toHaveCount(0);
   await expect(page.getByText('Cheated and somehow think you had a good reason?')).toHaveCount(0);
   await expect(page.getByText('THE ASSIGNMENT', { exact: true })).toHaveCount(0);
-  await expect(page.getByText('If your confession makes the show then the Classmates get to judge you.')).toBeVisible();
-  await expect(page.getByText('Set the scene. Tell on yourself. Give us the mess. Ask the Classmates.')).toBeVisible();
-  await expect(page.locator('#callback-title')).toHaveText("Sometimes 90 seconds ain't enough.");
-  await expect(page.getByText('Some confessions work as voice notes. The messiest ones may deserve a longer recorded conversation with OBK.')).toBeVisible();
-  await expect(page.getByText('ALIAS / WHERE YOU FOUND US / PHONE + YES')).toBeVisible();
-  await expect(page.getByText('OBK contacts you first—there are no surprise calls.', { exact: false })).toBeVisible();
-  await expect(page.locator('.confession-formula')).toHaveCount(0);
-  await expect(page.locator('.field-guide')).toHaveCount(0);
-  await expect(page.locator('.verdict-banner')).toHaveCount(0);
-  await expect(page.locator('.safety-compact')).toBeVisible();
+  await expect(page.getByText('If your confession makes the show, the Classmates get to judge you.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You get 90 seconds.' })).toBeVisible();
+  await expect(page.getByText('Give us what happened, what you did, and the part that makes you look bad.')).toBeVisible();
+  await expect(page.locator('.callback-plain')).toContainText('Want a callback?');
+  await expect(page.locator('.callback-plain')).toContainText('add your phone number and YES');
+  await expect(page.getByText('OBK contacts you first—there are no surprise calls.', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('Use an alias.', { exact: false })).toHaveCount(0);
+  await expect(page.locator('.callback-card')).toHaveCount(0);
+  await expect(page.locator('.recorder-handoff')).toHaveCount(0);
+  await expect(page.locator('.safety-compact')).toHaveCount(0);
 
   const cta = page.locator('.primary-cta');
   await expect(cta).toHaveAttribute('href', '#ready-to-confess');
@@ -44,14 +44,14 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await page.locator('#rights-check').check();
   await expect(button).toBeEnabled();
   await expect(button).toHaveText('I AGREE. CONTINUE TO THE RECORDER.');
-  await expect(page.locator('.recorder-handoff')).toContainText('ALIAS / SOURCE / PHONE + YES');
+  await expect(page.locator('.recorder-handoff')).toHaveCount(0);
   await expect(page.locator('#podline-frame')).toHaveCount(0);
   await Promise.all([
     page.waitForURL('https://podline.fm/toxic-confessions'),
     button.click()
   ]);
 
-  await expect(page.getByText('Use an alias. After recording, enter: alias / source / phone + YES (optional callback).')).toBeVisible();
+  await expect(page.getByText('You did the mess. Now tell the Classmates. In the name box, add phone + YES only if you want a callback.')).toBeVisible();
   await page.goBack({ waitUntil: 'networkidle' });
   const events = await page.evaluate(() => JSON.parse(localStorage.getItem('tc_event_history')).map(event => event.event));
   expect(events).toContain('tc_landing_view');
@@ -80,16 +80,17 @@ test('source tags persist into recorder tracking', async ({ page }) => {
   expect(completion).toMatchObject({ event: 'tc_submission_complete', source: 'instagram' });
 });
 
-test('desktop judge line stays on one line', async ({ page }) => {
+test('desktop hero and intake stay within the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1100 });
   await page.goto(process.env.TC_URL || 'http://127.0.0.1:8765/', { waitUntil: 'networkidle' });
 
-  const lineTops = await page.locator('.judge-line').evaluate(element => {
+  const lineTops = await page.locator('.hero-dek').evaluate(element => {
     const range = document.createRange();
     range.selectNodeContents(element);
     return [...new Set(Array.from(range.getClientRects(), rect => Math.round(rect.top)))];
   });
 
   expect(lineTops).toHaveLength(1);
+  await expect(page.locator('.recorder-section--compact')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy();
 });

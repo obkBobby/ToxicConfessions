@@ -192,6 +192,38 @@ button, input { font: inherit; }
 }
 .host-card figcaption span { color: var(--red); }
 
+.hero--compact { padding-bottom: clamp(42px, 5vw, 72px); }
+.hero-verdict {
+  max-width: 650px;
+  margin: 0 0 28px;
+  font-size: clamp(17px, 1.5vw, 21px);
+}
+.recorder-section--compact {
+  display: grid;
+  grid-template-columns: minmax(280px, .72fr) minmax(540px, 1.28fr);
+  gap: clamp(38px, 6vw, 90px);
+  align-items: start;
+  max-width: 1400px;
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  border-top: var(--line);
+}
+.lean-intake-copy h2 {
+  margin: 0 0 20px;
+  font: 900 clamp(44px, 5.2vw, 76px)/.86 var(--display);
+  letter-spacing: -.07em;
+}
+.lean-intake-copy > p:not(.eyebrow) { font-size: clamp(17px, 1.5vw, 21px); }
+.callback-plain {
+  margin: 28px 0 0;
+  padding: 20px;
+  background: var(--yellow);
+  border: var(--line);
+  box-shadow: 5px 5px 0 var(--ink);
+  font-size: 15px !important;
+}
+.recorder-section--compact .recorder-shell { width: 100%; }
+
 .hotline-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -445,6 +477,7 @@ footer p { margin: 0; }
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
   .host-card { max-width: 610px; justify-self: start; }
+  .recorder-section--compact { grid-template-columns: 1fr; }
   .safety-compact { grid-template-columns: 1fr; }
 }
 
