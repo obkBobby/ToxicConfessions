@@ -32,3 +32,17 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   expect(recorder).toBeTruthy();
   expect(errors).toEqual([]);
 });
+
+test('desktop judge line stays on one line', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  await page.goto(process.env.TC_URL || 'http://127.0.0.1:8765/', { waitUntil: 'networkidle' });
+
+  const lineTops = await page.locator('.judge-line').evaluate(element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return [...new Set(Array.from(range.getClientRects(), rect => Math.round(rect.top)))];
+  });
+
+  expect(lineTops).toHaveLength(1);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy();
+});

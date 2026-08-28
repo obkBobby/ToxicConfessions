@@ -272,9 +272,13 @@ button, input { font: inherit; }
   letter-spacing: -.07em;
 }
 .recorder-intro > p:not(.eyebrow) {
-  max-width: 720px;
+  max-width: none;
   margin: 10px 0;
   font-size: clamp(18px, 1.8vw, 23px);
+}
+.recorder-intro .judge-line {
+  white-space: nowrap;
+  font-size: clamp(14px, 1.5vw, 21px);
 }
 
 .recorder-shell {
@@ -438,6 +442,7 @@ footer p { margin: 0; }
   .hero h1 span { -webkit-text-stroke: 1px var(--ink); text-shadow: 3px 3px 0 var(--ink); }
   .hero-support { font-size: 15px; }
   .host-card { max-width: none; }
+  .recorder-intro .judge-line { white-space: normal; font-size: 18px; }
   .hotline-strip { grid-template-columns: repeat(2, 1fr); }
   .hotline-strip p:nth-child(2) { border-right: 0; }
   .hotline-strip p:nth-child(-n+2) { border-bottom: var(--line); }
