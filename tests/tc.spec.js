@@ -51,6 +51,7 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await page.waitForTimeout(2500);
   const recorder = page.frames().find(frame => frame.url().includes('/e/toxic-confessions'));
   expect(recorder).toBeTruthy();
+  await expect(recorder.getByText('Use an alias. After recording, enter: alias / source / phone + YES (optional callback).')).toBeVisible();
   const events = await page.evaluate(() => window.dataLayer.map(event => event.event));
   expect(events).toContain('tc_landing_view');
   expect(events).toContain('tc_primary_cta_click');
