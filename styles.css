@@ -264,6 +264,33 @@ button, input { font: inherit; }
   font-size: 14px;
 }
 
+.callback-card {
+  margin-top: 26px;
+  padding: clamp(22px, 3vw, 32px);
+  color: var(--white);
+  background: var(--ink);
+  border-left: 8px solid var(--red);
+}
+.callback-card__label {
+  margin: 0 0 10px;
+  color: var(--yellow);
+  font: 800 11px/1 var(--utility);
+  letter-spacing: .12em;
+}
+.callback-card h3 {
+  margin: 0 0 14px;
+  font: 900 clamp(25px, 3vw, 38px)/.95 var(--display);
+  letter-spacing: -.04em;
+}
+.callback-card > p:not(.callback-card__label) { margin: 9px 0; font-size: 15px; }
+.callback-format {
+  padding: 12px 14px;
+  color: var(--ink);
+  background: var(--yellow);
+  font: 800 13px/1.35 var(--utility) !important;
+}
+.callback-small { color: #d8d8d8; font-size: 12px !important; }
+
 .recorder-shell {
   border: 4px solid var(--ink);
   background: var(--ink);
@@ -342,12 +369,6 @@ button, input { font: inherit; }
   background: #fff;
 }
 
-.callback-line {
-  max-width: 920px;
-  margin: 30px 0 0;
-  font-size: clamp(16px, 1.6vw, 20px);
-}
-
 .safety-compact {
   display: grid;
   grid-template-columns: .8fr 1.2fr;
@@ -390,6 +411,28 @@ footer {
 }
 footer p { margin: 0; }
 
+.thanks-page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: var(--yellow);
+}
+.thanks-card {
+  width: min(760px, 100%);
+  padding: clamp(32px, 7vw, 78px);
+  background: var(--paper);
+  border: 5px solid var(--ink);
+  box-shadow: 14px 14px 0 var(--ink);
+}
+.thanks-card h1 {
+  margin: 12px 0 24px;
+  font: 900 clamp(56px, 10vw, 106px)/.82 var(--display);
+  letter-spacing: -.05em;
+}
+.thanks-card > p:not(.utility) { max-width: 610px; font-size: 18px; }
+.thanks-card .button { margin-top: 24px; }
+
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
   .host-card { max-width: 610px; justify-self: start; }
@@ -416,7 +459,7 @@ footer p { margin: 0; }
   .quick-prompt p:last-child { font-size: 17px; }
   .recorder-notes { grid-template-columns: 1fr; gap: 12px; }
   .gate-kicker { font-size: 22px; }
-  .callback-line { margin-top: 24px; font-size: 16px; }
+  .callback-card { margin-top: 20px; }
   .safety-compact { gap: 26px; padding: 42px 20px; }
   .podline-frame { padding: 10px; }
   .podline-frame iframe { min-width: 0; min-height: 720px; }

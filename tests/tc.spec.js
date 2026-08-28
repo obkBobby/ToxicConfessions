@@ -16,7 +16,10 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('THE ASSIGNMENT', { exact: true })).toHaveCount(0);
   await expect(page.getByText('If your confession makes the show then the Classmates get to judge you.')).toBeVisible();
   await expect(page.getByText('Set the scene. Tell on yourself. Give us the mess. Ask the Classmates.')).toBeVisible();
-  await expect(page.getByText("Because sometimes 90 seconds ain't enough.")).toBeVisible();
+  await expect(page.locator('#callback-title')).toHaveText("Sometimes 90 seconds ain't enough.");
+  await expect(page.getByText('Some confessions work as voice notes. The messiest ones may deserve a longer recorded conversation with OBK.')).toBeVisible();
+  await expect(page.getByText('ALIAS / WHERE YOU FOUND US / PHONE + YES')).toBeVisible();
+  await expect(page.getByText('OBK contacts you first—there are no surprise calls.', { exact: false })).toBeVisible();
   await expect(page.locator('.confession-formula')).toHaveCount(0);
   await expect(page.locator('.field-guide')).toHaveCount(0);
   await expect(page.locator('.verdict-banner')).toHaveCount(0);
@@ -48,7 +51,31 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await page.waitForTimeout(2500);
   const recorder = page.frames().find(frame => frame.url().includes('/e/toxic-confessions'));
   expect(recorder).toBeTruthy();
+  const events = await page.evaluate(() => window.dataLayer.map(event => event.event));
+  expect(events).toContain('tc_landing_view');
+  expect(events).toContain('tc_primary_cta_click');
+  expect(events).toContain('tc_consent_ready');
+  expect(events).toContain('tc_recorder_open');
   expect(errors).toEqual([]);
+});
+
+test('source tags persist into recorder tracking', async ({ page }) => {
+  const base = process.env.TC_URL || 'http://127.0.0.1:8765/';
+  const tagged = new URL(base);
+  tagged.search = 'utm_source=instagram&utm_medium=story&utm_campaign=tc_launch&utm_content=friday_prompt';
+  await page.goto(tagged.toString());
+  const attribution = await page.evaluate(() => JSON.parse(localStorage.getItem('tc_attribution')));
+  expect(attribution).toMatchObject({
+    source: 'instagram',
+    medium: 'story',
+    campaign: 'tc_launch',
+    content: 'friday_prompt'
+  });
+
+  await page.goto(new URL('thanks/', base).toString());
+  await expect(page.getByRole('heading', { name: 'CONFESSION RECEIVED.' })).toBeVisible();
+  const completion = await page.evaluate(() => JSON.parse(localStorage.getItem('tc_last_event')));
+  expect(completion).toMatchObject({ event: 'tc_submission_complete', source: 'instagram' });
 });
 
 test('desktop judge line stays on one line', async ({ page }) => {
