@@ -311,6 +311,7 @@ button, input { font: inherit; }
   font: 900 clamp(22px, 2.5vw, 34px)/1 var(--display);
   letter-spacing: -.04em;
 }
+.keep-together { white-space: nowrap; }
 .check-row {
   display: grid;
   grid-template-columns: 28px 1fr;
@@ -446,8 +447,14 @@ footer p { margin: 0; }
   .hotline-strip { grid-template-columns: repeat(2, 1fr); }
   .hotline-strip p:nth-child(2) { border-right: 0; }
   .hotline-strip p:nth-child(-n+2) { border-bottom: var(--line); }
-  .confession-formula { grid-template-columns: 1fr; }
+  .recorder-section { padding-top: 56px; padding-bottom: 64px; }
+  .section-intro { margin-bottom: 36px; }
+  .confession-formula { grid-template-columns: 1fr; margin-bottom: 56px; }
   .confession-formula li { min-height: auto; grid-template-columns: 42px 1fr; padding: 22px 18px; }
+  .recorder-intro { margin-bottom: 32px; }
+  .gate-kicker { font-size: 22px; }
+  .field-guide { margin-top: 32px; }
+  .rules { padding-top: 58px; padding-bottom: 58px; }
   .podline-frame { padding: 10px; }
   .podline-frame iframe { min-width: 0; min-height: 720px; }
   footer { grid-template-columns: 1fr; align-items: start; }

@@ -17,6 +17,19 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('If your confession makes the show then the Classmates get to judge you.')).toBeVisible();
   await expect(page.getByText('YOU SPEAK.')).toBeVisible();
 
+  const cta = page.locator('.primary-cta');
+  await expect(cta).toHaveAttribute('href', '#ready-to-confess');
+  await cta.click();
+  await expect(page).toHaveURL(/#ready-to-confess$/);
+  await expect.poll(async () => Math.abs(await page.locator('#ready-to-confess').evaluate(element => element.getBoundingClientRect().top))).toBeLessThanOrEqual(2);
+
+  const micLineTops = await page.locator('.gate-kicker .keep-together').evaluate(element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return [...new Set(Array.from(range.getClientRects(), rect => Math.round(rect.top)))];
+  });
+  expect(micLineTops).toHaveLength(1);
+
   const button = page.locator('#open-recorder');
   await expect(button).toBeDisabled();
   await page.locator('#age-check').check();
