@@ -312,7 +312,7 @@ button, input { font: inherit; }
   border-radius: 50%;
   background: var(--red);
 }
-.consent-gate, .podline-frame {
+.consent-gate {
   padding: clamp(24px, 4vw, 48px);
   background: var(--white);
 }
@@ -348,6 +348,15 @@ button, input { font: inherit; }
   border-left: 4px solid var(--red);
   font-size: 14px;
 }
+.recorder-handoff {
+  max-width: 840px;
+  margin: 18px 0 0;
+  padding: 16px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+.recorder-handoff p { margin: 0; font-size: 14px; }
+.recorder-handoff .callback-format { margin: 10px 0; }
 .gate-prompt {
   margin: 26px 0 0;
   font: 900 clamp(22px, 2.5vw, 32px)/1 var(--display);

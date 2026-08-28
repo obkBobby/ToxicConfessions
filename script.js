@@ -1,11 +1,7 @@
 const ageCheck = document.querySelector('#age-check');
 const rightsCheck = document.querySelector('#rights-check');
 const openButton = document.querySelector('#open-recorder');
-const consentGate = document.querySelector('#consent-gate');
-const frameWrap = document.querySelector('#podline-frame');
-const recorderFrame = frameWrap?.querySelector('iframe');
 const primaryCta = document.querySelector('.primary-cta');
-const fallbackLink = document.querySelector('.iframe-fallback a');
 
 const params = new URLSearchParams(window.location.search);
 const knownSources = ['instagram', 'tiktok', 'facebook', 'youtube', 'email', 'podcast', 'friend', 'obkstart'];
@@ -37,6 +33,13 @@ function track(event, details = {}) {
   window.dataLayer.push(payload);
   localStorage.setItem('tc_attribution', JSON.stringify(attribution));
   localStorage.setItem('tc_last_event', JSON.stringify(payload));
+  try {
+    const history = JSON.parse(localStorage.getItem('tc_event_history')) || [];
+    history.push(payload);
+    localStorage.setItem('tc_event_history', JSON.stringify(history.slice(-50)));
+  } catch {
+    localStorage.setItem('tc_event_history', JSON.stringify([payload]));
+  }
 }
 
 function updateGate() {
@@ -49,20 +52,15 @@ function updateGate() {
 }
 
 function openRecorder() {
-  if (openButton.disabled || !recorderFrame || !frameWrap || !consentGate) return;
-  recorderFrame.src = recorderFrame.dataset.src;
-  consentGate.hidden = true;
-  frameWrap.hidden = false;
+  if (openButton.disabled || !openButton.dataset.destination) return;
   track('tc_recorder_open');
-  frameWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  recorderFrame.focus({ preventScroll: true });
+  window.location.assign(openButton.dataset.destination);
 }
 
 ageCheck?.addEventListener('change', updateGate);
 rightsCheck?.addEventListener('change', updateGate);
 openButton?.addEventListener('click', openRecorder);
 primaryCta?.addEventListener('click', () => track('tc_primary_cta_click'));
-fallbackLink?.addEventListener('click', () => track('tc_recorder_fallback_click'));
 
 track('tc_landing_view');
 window.addEventListener('message', event => {

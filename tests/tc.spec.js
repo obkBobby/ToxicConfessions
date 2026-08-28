@@ -43,16 +43,17 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await page.locator('#age-check').check();
   await page.locator('#rights-check').check();
   await expect(button).toBeEnabled();
-  await button.click();
+  await expect(button).toHaveText('I AGREE. CONTINUE TO THE RECORDER.');
+  await expect(page.locator('.recorder-handoff')).toContainText('ALIAS / SOURCE / PHONE + YES');
+  await expect(page.locator('#podline-frame')).toHaveCount(0);
+  await Promise.all([
+    page.waitForURL('https://podline.fm/toxic-confessions'),
+    button.click()
+  ]);
 
-  await expect(page.locator('#consent-gate')).toBeHidden();
-  await expect(page.locator('#podline-frame')).toBeVisible();
-  await expect(page.locator('#podline-frame iframe')).toHaveAttribute('src', 'https://podline.fm/e/toxic-confessions');
-  await page.waitForTimeout(2500);
-  const recorder = page.frames().find(frame => frame.url().includes('/e/toxic-confessions'));
-  expect(recorder).toBeTruthy();
-  await expect(recorder.getByText('Use an alias. After recording, enter: alias / source / phone + YES (optional callback).')).toBeVisible();
-  const events = await page.evaluate(() => window.dataLayer.map(event => event.event));
+  await expect(page.getByText('Use an alias. After recording, enter: alias / source / phone + YES (optional callback).')).toBeVisible();
+  await page.goBack({ waitUntil: 'networkidle' });
+  const events = await page.evaluate(() => JSON.parse(localStorage.getItem('tc_event_history')).map(event => event.event));
   expect(events).toContain('tc_landing_view');
   expect(events).toContain('tc_primary_cta_click');
   expect(events).toContain('tc_consent_ready');
