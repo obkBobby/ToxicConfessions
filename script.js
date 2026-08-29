@@ -1,5 +1,4 @@
-const ageCheck = document.querySelector('#age-check');
-const rightsCheck = document.querySelector('#rights-check');
+const consentCheck = document.querySelector('#consent-check');
 const openButton = document.querySelector('#open-recorder');
 const primaryCta = document.querySelector('.primary-cta');
 
@@ -43,8 +42,8 @@ function track(event, details = {}) {
 }
 
 function updateGate() {
-  if (!openButton || !ageCheck || !rightsCheck) return;
-  openButton.disabled = !(ageCheck.checked && rightsCheck.checked);
+  if (!openButton || !consentCheck) return;
+  openButton.disabled = !consentCheck.checked;
   if (!openButton.disabled && openButton.dataset.readyTracked !== 'true') {
     openButton.dataset.readyTracked = 'true';
     track('tc_consent_ready');
@@ -57,8 +56,7 @@ function openRecorder() {
   window.location.assign(openButton.dataset.destination);
 }
 
-ageCheck?.addEventListener('change', updateGate);
-rightsCheck?.addEventListener('change', updateGate);
+consentCheck?.addEventListener('change', updateGate);
 openButton?.addEventListener('click', openRecorder);
 primaryCta?.addEventListener('click', () => track('tc_primary_cta_click'));
 

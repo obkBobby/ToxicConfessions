@@ -15,10 +15,11 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page.getByText('Cheated and somehow think you had a good reason?')).toHaveCount(0);
   await expect(page.getByText('THE ASSIGNMENT', { exact: true })).toHaveCount(0);
   await expect(page.getByText('If your confession makes the show, the Classmates get to judge you.')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'You get 90 seconds.' })).toBeVisible();
-  await expect(page.getByText('Give us what happened, what you did, and the part that makes you look bad.')).toBeVisible();
-  await expect(page.locator('.callback-plain')).toContainText('Want a callback?');
-  await expect(page.locator('.callback-plain')).toContainText('add your phone number and YES');
+  await expect(page.getByRole('heading', { name: 'Leave your confession.' })).toBeVisible();
+  await expect(page.getByText('Give us what happened, what you did, and the part that makes you look bad. You have up to 90 seconds.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You get 90 seconds.' })).toHaveCount(0);
+  await expect(page.locator('.callback-plain')).toHaveText('Want a callback? Leave your phone number after the name you want us to use. We might call you back on the show.');
+  await expect(page.getByText('YES', { exact: true })).toHaveCount(0);
   await expect(page.getByText('OBK contacts you first—there are no surprise calls.', { exact: false })).toHaveCount(0);
   await expect(page.getByText('Use an alias.', { exact: false })).toHaveCount(0);
   await expect(page.locator('.callback-card')).toHaveCount(0);
@@ -31,19 +32,12 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
   await expect(page).toHaveURL(/#ready-to-confess$/);
   await expect.poll(async () => Math.abs(await page.locator('#ready-to-confess').evaluate(element => element.getBoundingClientRect().top))).toBeLessThanOrEqual(2);
 
-  const micLineTops = await page.locator('.gate-kicker .keep-together').evaluate(element => {
-    const range = document.createRange();
-    range.selectNodeContents(element);
-    return [...new Set(Array.from(range.getClientRects(), rect => Math.round(rect.top)))];
-  });
-  expect(micLineTops).toHaveLength(1);
-
   const button = page.locator('#open-recorder');
   await expect(button).toBeDisabled();
-  await page.locator('#age-check').check();
-  await page.locator('#rights-check').check();
+  await expect(page.locator('.check-row')).toHaveCount(1);
+  await page.locator('#consent-check').check();
   await expect(button).toBeEnabled();
-  await expect(button).toHaveText('I AGREE. CONTINUE TO THE RECORDER.');
+  await expect(button).toHaveText('CONTINUE TO THE RECORDER.');
   await expect(page.locator('.recorder-handoff')).toHaveCount(0);
   await expect(page.locator('#podline-frame')).toHaveCount(0);
   await Promise.all([
@@ -51,7 +45,7 @@ test('mobile layout and consent-gated recorder work', async ({ page }) => {
     button.click()
   ]);
 
-  await expect(page.getByText('You did the mess. Now tell the Classmates. In the name box, add phone + YES only if you want a callback.')).toBeVisible();
+  await expect(page.getByText('Drop your message. Want a callback? Add your phone number after the name you want us to use. We might call you back on the show.')).toBeVisible();
   await page.goBack({ waitUntil: 'networkidle' });
   const events = await page.evaluate(() => JSON.parse(localStorage.getItem('tc_event_history')).map(event => event.event));
   expect(events).toContain('tc_landing_view');
