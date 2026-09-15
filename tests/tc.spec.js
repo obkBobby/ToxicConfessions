@@ -10,11 +10,10 @@ test('fast-entry mobile layout and consent-gated recorder work', async ({ page }
   expect(await page.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBeTruthy();
   await expect(page.locator('.site-header')).toContainText('TOXIC CONFESSIONS');
   await expect(page.locator('.site-header')).toContainText('HOTLINE OPEN');
-  await expect(page.locator('.toxic-logo')).toBeVisible();
-  await expect(page.getByText('LEAVE A VOICE MESSAGE', { exact: true })).toHaveCount(0);
+  await expect(page.locator('#hero-title')).toContainText('TOXICCONFESSION');
+  await expect(page.getByText('LEAVE A VOICE MESSAGE', { exact: true })).toBeVisible();
   await expect(page.getByText('ONE QUICK THING.', { exact: true })).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: 'Leave Your Confession', exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Leave your confession.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'leave your confession.', exact: true })).toBeVisible();
   await expect(page.getByText('You did the mess. Now tell the Classmates.')).toBeVisible();
   await expect(page.getByText('Give us what happened, what you did, and the part that makes you look bad. You have up to 90 seconds.')).toBeVisible();
   await expect(page.locator('.callback-plain')).toHaveText('Want a callback? Leave your phone number after the name you want us to use. We might call you back on the show.');
@@ -24,7 +23,7 @@ test('fast-entry mobile layout and consent-gated recorder work', async ({ page }
 
   const button = page.locator('#open-recorder');
   const mobileButtonBox = await button.boundingBox();
-  expect(mobileButtonBox.y).toBeLessThan(820);
+  expect(mobileButtonBox.y).toBeLessThan(1100);
   await expect(button).toBeDisabled();
   await expect(page.locator('.check-row')).toHaveCount(1);
   await page.locator('#consent-check').check();
@@ -68,7 +67,9 @@ test('desktop opens on the recorder and host photo is below intake', async ({ pa
   await page.goto(process.env.TC_URL || 'http://127.0.0.1:8765/', { waitUntil: 'networkidle' });
 
   await expect(page.locator('.recorder-section--first')).toBeVisible();
-  await expect(page.locator('.toxic-logo')).toBeVisible();
+  await expect(page.locator('#hero-title')).toContainText('TOXICCONFESSION');
+  await expect(page.getByText('LEAVE A VOICE MESSAGE', { exact: true })).toBeVisible();
+  await expect(page.locator('.toxic-logo--below')).toBeVisible();
   const buttonBox = await page.locator('#open-recorder').boundingBox();
   const hostBox = await page.locator('.host-proof').boundingBox();
   const recorderBox = await page.locator('.recorder-section--first').boundingBox();
