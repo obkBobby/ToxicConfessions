@@ -32,6 +32,7 @@ for (const width of [320, 390, 1440]) {
     expect(await page.locator('img').evaluateAll(imgs => imgs.every(i => i.complete && i.naturalWidth > 0))).toBeTruthy();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBeTruthy();
     const button = page.locator('#open-recorder');
+    await expect(button).toHaveText('CONFESS');
     await expect(button).toBeDisabled();
     await expect(page.locator('.check-row')).toHaveCount(1);
     await page.locator('#consent-check').check();
