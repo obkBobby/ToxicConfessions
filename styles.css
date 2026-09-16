@@ -94,7 +94,7 @@ button, input { font: inherit; }
   padding: clamp(28px, 4vw, 56px) clamp(16px, 3.5vw, 56px) clamp(36px, 5vw, 72px);
 }
 .recorder-section--first {
-  min-height: calc(100vh - 78px);
+  min-height: auto;
   display: grid;
   grid-template-columns: minmax(420px, .72fr) minmax(560px, 1.28fr);
   gap: clamp(38px, 5vw, 84px);
@@ -139,6 +139,9 @@ button, input { font: inherit; }
   font-size: 15px;
 }
 .callback-plain strong { font-weight: 900; }
+.callback-plain { white-space: nowrap; }
+.hotline-status { display: inline-flex; align-items: center; gap: 9px; }
+.hotline-status .status-dot { flex: 0 0 12px; }
 
 .recorder-shell {
   width: 100%;
@@ -332,7 +335,7 @@ footer p { margin: 0; }
   .lean-intake-copy h1 { font-size: clamp(40px, 11.5vw, 46px); }
   .lean-intake-copy h1 strong { -webkit-text-stroke: 1px var(--ink); text-shadow: 3px 3px 0 var(--ink); }
   .hero-dek { font-size: 21px; }
-  .callback-plain { margin-top: 18px; padding: 16px; }
+  .callback-plain { margin-top: 18px; padding: 16px; font-size: clamp(12px, 3.35vw, 15px); }
   .recorder-label { font-size: 10px; padding: 11px 12px; }
   .consent-gate { padding: 20px 18px 24px; }
   .gate-kicker { font-size: 27px; margin-bottom: 16px; }
