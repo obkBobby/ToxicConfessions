@@ -233,7 +233,7 @@ button, input { font: inherit; }
 
 .host-proof {
   display: grid;
-  grid-template-columns: minmax(280px, .8fr) minmax(360px, 1fr);
+  grid-template-columns: 1fr;
   gap: clamp(28px, 5vw, 72px);
   align-items: center;
   padding: clamp(42px, 6vw, 82px) clamp(16px, 4vw, 64px);
@@ -259,7 +259,7 @@ button, input { font: inherit; }
   width: 100%;
   max-width: 610px;
   margin: 0;
-  justify-self: end;
+  justify-self: center;
 }
 .photo-wrap {
   position: relative;
