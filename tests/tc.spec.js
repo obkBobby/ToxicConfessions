@@ -8,6 +8,7 @@ for (const width of [320, 390, 1440]) {
     await page.setViewportSize({width, height: 900});
     await page.goto(base, {waitUntil: 'networkidle'});
     await expect(page.locator('.hero-dek')).toHaveText('You made the mess. Now spill the tea.');
+    await expect(page.locator('#hero-title strong')).toHaveText('CONFESSIONS');
     await expect(page.locator('.callback-plain strong')).toHaveText('Leave a confession.');
     await expect(page.locator('.callback-plain span')).toHaveText('You have 90 seconds.');
     const lines = await page.locator('.callback-plain').evaluate(e => {
